@@ -1,0 +1,208 @@
+---
+// src/components/Catalogo.astro
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+
+// Diccionario de títulos de la sección
+const t = {
+  es: {
+    titulo: "Portafolio Farmacéutico",
+    subtitulo: "LÍNEAS DE PRODUCTOS",
+    todos: "Todos",
+    anestesicos: "Anestésicos",
+    corticoesteroides: "Corticoesteroides",
+    soluciones: "Soluciones Clínicas",
+    plasmaticos: "Derivados Plasmáticos",
+    principio: "Principio Activo",
+    presentacion: "Presentación"
+  },
+  en: {
+    titulo: "Pharmaceutical Portfolio",
+    subtitulo: "PRODUCT LINES",
+    todos: "All",
+    anestesicos: "Anesthetics",
+    corticoesteroides: "Corticosteroids",
+    soluciones: "Clinical Solutions",
+    plasmaticos: "Plasma Derivatives",
+    principio: "Active Ingredient",
+    presentacion: "Presentation"
+  }
+}[lang];
+
+// Base de datos de productos reales de VINTER extraídos del brochure
+const productos = [
+  {
+    id: "propohem",
+    nombre: "PROPOHEM",
+    componente: "Propofol USP 1%",
+    concentracion: "200 mg / 20 mL",
+    presentacion: lang === 'es' ? "Emulsión Estéril para Inyección I.V." : "Sterile Emulsion for I.V. Injection",
+    linea: "anestesicos"
+  },
+  {
+    id: "vivacort",
+    nombre: "VIVACORT",
+    componente: "Acetónido de Triamcinolona",
+    concentracion: "40 mg / mL",
+    presentacion: lang === 'es' ? "Jeringa Precargada - Suspensión Inyectable" : "Pre-filled Syringe - Injectable Suspension",
+    linea: "corticoesteroides"
+  },
+  {
+    id: "paracetaviv",
+    nombre: "PARACETAVIV",
+    componente: "Paracetamol 1% B.P.",
+    concentracion: "1000 mg / 100 mL",
+    presentacion: lang === 'es' ? "Solución Inyectable Vía Intravenosa" : "Injectable Solution Via Intravenous",
+    linea: "soluciones"
+  },
+  {
+    id: "metroviv",
+    nombre: "METROVIV",
+    componente: "Metronidazol B.P.",
+    concentracion: "500 mg / 100 mL",
+    presentacion: lang === 'es' ? "Infusión Intravenosa - Dosis Única" : "Intravenous Infusion - Single Dose",
+    linea: "soluciones"
+  },
+  {
+    id: "ciproviv",
+    nombre: "CIPROVIV",
+    componente: "Ciprofloxacina USP",
+    concentracion: "200 mg / 100 mL",
+    presentacion: lang === 'es' ? "Inyectable Intravenoso - Dosis Única" : "Intravenous Injectable - Single Dose",
+    linea: "soluciones"
+  },
+  {
+    id: "cloruro",
+    nombre: "CLORURO DE SODIO",
+    componente: "Pra-clo 0.9%",
+    concentracion: "500 mL",
+    presentacion: lang === 'es' ? "Solución Fisiológica - Infusión Intravenosa" : "Physiological Solution - Intravenous Infusion",
+    linea: "soluciones"
+  },
+  {
+    id: "ringer",
+    nombre: "RINGER LACTATO",
+    componente: "Pra - RL",
+    concentracion: "500 mg / 100 mL",
+    presentacion: lang === 'es' ? "Solución de Hartmann - Infusión Intravenosa" : "Hartmann's Solution - Intravenous Infusion",
+    linea: "soluciones"
+  },
+  {
+    id: "albuviv",
+    nombre: "ALBUVIV",
+    componente: "Albúmina Humana (Solución al 20%)",
+    concentracion: "50 mL / 10 g",
+    presentacion: lang === 'es' ? "Para uso Intravenoso" : "For Intravenous use",
+    linea: "plasmaticos"
+  },
+  {
+    id: "inmuviv",
+    nombre: "INMUVIV",
+    componente: "Inmunoglobulina Normal Humana (Solución al 5%)",
+    concentracion: "100 mL / 5 g",
+    presentacion: lang === 'es' ? "Fabricado con plasma humano calificado" : "Manufactured from qualified human plasma",
+    linea: "plasmaticos"
+  }
+];
+---
+
+<section id="catalogo" class="py-24 bg-white text-slate-950">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- ENCABEZADO DE LA SECCIÓN -->
+    <div class="text-center max-w-xl mx-auto mb-16">
+      <span class="text-blue-600 font-bold uppercase text-xs tracking-widest block mb-2">{t.subtitulo}</span>
+      <h2 class="text-3xl md:text-4xl font-black tracking-tight">{t.titulo}</h2>
+    </div>
+
+    <!-- BOTONES FILTROS INTERACTIVOS (TABS) -->
+    <div class="flex flex-wrap justify-center gap-2 mb-12">
+      <button class="filter-btn active bg-blue-600 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-all" data-filter="all">
+        {t.todos}
+      </button>
+      <button class="filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 text-sm font-medium px-5 py-2.5 rounded-xl transition-all" data-filter="anestesicos">
+        {t.anestesicos}
+      </button>
+      <button class="filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 text-sm font-medium px-5 py-2.5 rounded-xl transition-all" data-filter="corticoesteroides">
+        {t.corticoesteroides}
+      </button>
+      <button class="filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 text-sm font-medium px-5 py-2.5 rounded-xl transition-all" data-filter="soluciones">
+        {t.soluciones}
+      </button>
+      <button class="filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 text-sm font-medium px-5 py-2.5 rounded-xl transition-all" data-filter="plasmaticos">
+        {t.plasmaticos}
+      </button>
+    </div>
+
+    <!-- REJILLA DE PRODUCTOS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="products-grid">
+      {productos.map((prod) => (
+        <div class="product-card bg-slate-50 rounded-2xl border border-slate-100 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md" data-linea={prod.linea}>
+          <div class="space-y-4">
+            <div class="flex justify-between items-start gap-2">
+              <h3 class="text-xl font-extrabold tracking-wide text-slate-900">{prod.nombre}</h3>
+              <span class="text-xs font-mono font-bold bg-blue-50 text-blue-600 px-2.5 py-1 rounded-lg shrink-0">
+                {prod.concentracion}
+              </span>
+            </div>
+            
+            <div class="space-y-2 border-t border-slate-200/60 pt-4">
+              <div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">{t.principio}</span>
+                <p class="text-sm font-medium text-slate-700">{prod.componente}</p>
+              </div>
+              <div>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">{t.presentacion}</span>
+                <p class="text-xs text-slate-500 italic">{prod.presentacion}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<!-- SCRIPT DE INTERACTIVIDAD (Lógica Client-Side) -->
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.product-card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Quitar la clase activa de todos los botones
+      buttons.forEach(b => {
+        b.classList.remove('bg-blue-600', 'text-white', 'active');
+        b.classList.add('bg-slate-100', 'text-slate-600');
+      });
+
+      // 2. Añadir clase activa al botón presionado
+      btn.classList.remove('bg-slate-100', 'text-slate-600');
+      btn.classList.add('bg-blue-600', 'text-white', 'active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      // 3. Filtrar las tarjetas con una animación suave
+      cards.forEach(card => {
+        const linea = card.getAttribute('data-linea');
+        if (filterValue === 'all' || linea === filterValue) {
+          (card as HTMLElement).style.display = 'flex';
+          setTimeout(() => {
+            (card as HTMLElement).style.opacity = '1';
+            (card as HTMLElement).style.transform = 'scale(1)';
+          }, 10);
+        } else {
+          (card as HTMLElement).style.opacity = '0';
+          (card as HTMLElement).style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            (card as HTMLElement).style.display = 'none';
+          }, 150);
+        }
+      });
+    });
+  });
+</script>

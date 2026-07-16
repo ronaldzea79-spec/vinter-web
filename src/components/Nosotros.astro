@@ -1,0 +1,77 @@
+---
+// src/components/Nosotros.astro
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const t = {
+  es: {
+    quienesSomos: "¿QUIÉNES SOMOS?",
+    quienesSomosDesc1: "En Vivas Internacional C.A., somos una empresa farmacéutica venezolana enfocada en importar y comercializar productos con los más altos estándares de calidad.",
+    quienesSomosDesc2: "Respaldados por un talento humano altamente calificado, trabajamos cada día para ser líderes de confianza en el mercado nacional, expandiendo nuestro portafolio y mejorando continuamente para garantizar el bienestar y la salud de todos los venezolanos.",
+    mision: "MISIÓN",
+    misionDesc: "Somos una empresa farmacéutica venezolana que importa, representa y comercializa productos, medicamentos y equipos médicos fabricados con los más altos estándares de calidad para el cuidado de la salud de los venezolanos, a través de un equipo humano altamente calificado y motivado.",
+    vision: "VISIÓN",
+    visionDesc: "Ser líderes en los principales estados de Venezuela, garantizando un crecimiento en el portafolio y asegurando excelencia, confianza y calidad, procurando la mejora continua del capital humano y los procesos."
+  },
+  en: {
+    quienesSomos: "ABOUT US",
+    quienesSomosDesc1: "At Vivas Internacional C.A., we are a Venezuelan pharmaceutical company focused on importing and marketing products with the highest quality standards.",
+    quienesSomosDesc2: "Backed by highly qualified human talent, we work every day to be trusted leaders in the national market, expanding our portfolio and continuously improving to guarantee the well-being and health of all Venezuelans.",
+    mision: "MISSION",
+    misionDesc: "We are a Venezuelan pharmaceutical company that imports, represents, and markets products, medicines, and medical equipment manufactured with the highest quality standards for the healthcare of Venezuelans, through a highly qualified and motivated human team.",
+    vision: "VISION",
+    visionDesc: "To be leaders in the main states of Venezuela, guaranteeing growth in the portfolio and ensuring excellence, trust, and quality, striving for the continuous improvement of human capital and processes."
+  }
+}[lang];
+---
+
+<section id="nosotros" class="py-24 bg-slate-50 border-t border-slate-200/60">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    
+    <div class="space-y-6">
+      <span class="text-blue-600 font-bold uppercase text-xs tracking-widest block">{t.quienesSomos}</span>
+      <h2 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
+        {lang === 'es' ? 'Garantizamos el bienestar y la salud nacional' : 'We guarantee national health and well-being'}
+      </h2>
+      <p class="text-lg text-slate-700 leading-relaxed font-medium">
+        {t.quienesSomosDesc1}
+      </p>
+      <p class="text-slate-500 leading-relaxed text-sm">
+        {t.quienesSomosDesc2}
+      </p>
+    </div>
+
+    <div class="space-y-6">
+      
+      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 tracking-wide">{t.mision}</h3>
+        </div>
+        <p class="text-slate-500 text-sm leading-relaxed">{t.misionDesc}</p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 tracking-wide">{t.vision}</h3>
+        </div>
+        <p class="text-slate-500 text-sm leading-relaxed">{t.visionDesc}</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>

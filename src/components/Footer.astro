@@ -1,0 +1,74 @@
+---
+// src/components/Footer.astro
+interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+
+const currentYear = new Date().getFullYear();
+
+const t = {
+  es: {
+    eslogan: "Medicamentos de primera elección",
+    presencia: "Presencia Nacional",
+    presenciaDesc: "Distribución certificada en las principales clínicas y centros de salud de los estados: Táchira, Caracas, Lara, Mérida, Barinas, Falcón, Monagas, Aragua, Portuguesa y Carabobo.",
+    unete: "¡Únete a nuestra red de aliados!",
+    contacto: "Contacto Corporativo",
+    derechos: "Todos los derechos reservados."
+  },
+  en: {
+    eslogan: "First-choice medicines",
+    presencia: "National Presence",
+    presenciaDesc: "Certified distribution in the main clinics and health centers across the states of: Táchira, Caracas, Lara, Mérida, Barinas, Falcón, Monagas, Aragua, Portuguesa, and Carabobo.",
+    unete: "Join our network of allies!",
+    contacto: "Corporate Contact",
+    derechos: "All rights reserved."
+  }
+}[lang];
+---
+
+<footer id="contacto" class="bg-blue-950 text-white pt-20 pb-10 border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+    
+    <div class="space-y-4">
+      <div class="flex items-center">
+        <span class="text-3xl font-black tracking-wider">VINTER</span>
+        <span class="text-xs font-bold text-blue-400 ml-1 mt-3 font-mono">.ca</span>
+      </div>
+      <p class="text-sm text-blue-300/80 font-medium italic">
+        {t.eslogan} [cite: 2]
+      </p>
+      <div class="text-xs text-slate-400 space-y-1 pt-2 font-mono">
+        <p>Vivas Internacional C.A. [cite: 2]</p>
+        <p>RIF: J-50158422-2 </p>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="text-lg font-bold tracking-wide text-blue-400">{t.presencia} [cite: 153]</h3>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        {t.presenciaDesc} [cite: 155, 177, 179, 183, 187, 188, 190, 192, 194, 195]
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <h3 class="text-lg font-bold tracking-wide text-blue-400">{t.contacto} [cite: 5]</h3>
+      <p class="text-sm font-semibold text-slate-200">
+        {t.unete} 
+      </p>
+      
+      <div class="pt-2 flex gap-4">
+        <a href="#contacto" class="bg-white/5 hover:bg-blue-600 p-3 rounded-xl border border-white/10 transition-all text-xs font-medium tracking-wider uppercase block text-center w-full">
+          {lang === 'es' ? 'Contactar por WhatsApp' : 'Contact via WhatsApp'}
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 pt-8 border-t border-white/5 text-center md:flex md:justify-between text-xs text-slate-500 font-mono">
+    <p>&copy; {currentYear} VINTER. {t.derechos}</p>
+    <p class="mt-2 md:mt-0">Designed & Developed with Astro + Tailwind</p>
+  </div>
+</footer>

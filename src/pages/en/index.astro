@@ -1,0 +1,152 @@
+---
+import '../../styles/global.css';
+import ValorCard from '../../components/ValorCard.astro';
+import Header from '../../components/Header.astro';
+import Catalogo from '../../components/Catalogo.astro';
+import Nosotros from '../../components/Nosotros.astro';
+import Footer from '../../components/Footer.astro';
+
+// Importamos las utilidades de traducción
+import { useTranslations } from '../../i18n/utils';
+
+// Inicializamos la función para el idioma Español ('es')
+const t = useTranslations('en');
+
+// Los datos dinámicos como los medicamentos se quedan aquí porque no cambian de nombre
+const productosDestacados = [
+  {
+    nombre: "VIVACORT",
+    componente: "Acetónido de Triamcinolona",
+    concentracion: "40 mg / mL",
+    presentacion: "Jeringa Precargada - Suspensión Inyectable",
+    categoria: "Corticoesteroides"
+  },
+  {
+    nombre: "PROPOHEM",
+    componente: "Propofol USP 1%",
+    concentracion: "200 mg / 20 mL",
+    presentacion: "Emulsión Estéril para Inyección I.V.",
+    categoria: "Anestésicos"
+  },
+  {
+    nombre: "PARACETAVIV",
+    componente: "Paracetamol 1% B.P.",
+    concentracion: "1000 mg / 100 mL",
+    presentacion: "Solución Inyectable Vía Intravenosa",
+    categoria: "Soluciones Clínicas"
+  }
+];
+
+const certificaciones = [
+  "EU-GMP (Buenas Prácticas de Manufactura)",
+  "Aprobación PIC/S",
+  "World Health Organization (OMS)",
+  "FDA (Estados Unidos)"
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>VINTER | {t('card.1.subtitle')}</title>
+  </head>
+  <body class="bg-slate-50 text-slate-800 font-sans">
+    <Header lang="en" />
+   
+    <!-- HERO BANNER SECTION (Con datos dinámicos) -->
+    <section class="relative min-h-[80vh] flex items-center bg-gradient-to-br from-blue-950 to-blue-900 text-white overflow-hidden">
+      <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+      <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="space-y-6">
+          <span class="text-blue-400 font-semibold tracking-wider uppercase text-sm block">
+            {t('hero.tagline')}
+          </span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            {t('hero.title')}
+          </h1>
+          <p class="text-lg text-slate-300 max-w-lg">
+            {t('hero.desc')}
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#catalogo" class="bg-blue-600 hover:bg-blue-500 text-white font-medium px-6 py-3 rounded-lg transition-colors shadow-lg shadow-blue-900/40">
+              {t('nav.catalogo')}
+            </a>
+            <a href="#certificaciones" class="border border-slate-400 hover:border-white text-white font-medium px-6 py-3 rounded-lg transition-colors">
+              {t('nav.calidad')}
+            </a>
+          </div>
+        </div>
+
+        <!-- Bloque Derecho Estilizado con Tailwind -->
+        <div class="hidden md:block bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm shadow-xl">
+          <h3 class="text-blue-400 font-bold mb-4 uppercase tracking-wider text-xs">Portafolio Clínico Destacado</h3>
+          <div class="space-y-4">
+            {productosDestacados.map((prod) => (
+              <div class="bg-slate-950/40 p-4 rounded-xl border border-white/5 hover:border-blue-500/30 transition-all">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="font-bold text-white tracking-wide text-lg">{prod.nombre}</h4>
+                    <p class="text-sm text-slate-300">{prod.componente}</p>
+                  </div>
+                  <span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-1 rounded-md font-mono">{prod.concentracion}</span>
+                </div>
+                <p class="text-xs text-slate-400 mt-2 italic">{prod.presentacion}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+	<section class="py-20 bg-slate-50 relative z-20 -mt-8">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <ValorCard 
+            numero="01"
+            subtitulo={t('card.1.subtitle')}
+            titulo={t('card.1.title')}
+            descripcion={t('card.1.desc')}
+          />
+
+          <ValorCard 
+            numero="02"
+            subtitulo={t('card.2.subtitle')}
+            titulo={t('card.2.title')}
+            descripcion={t('card.2.desc')}
+          />
+
+          <ValorCard 
+            numero="03"
+            subtitulo={t('card.3.subtitle')}
+            titulo={t('card.3.title')}
+            descripcion={t('card.3.desc')}
+          />
+
+        </div>
+      </div>
+    </section>
+	
+    <!-- SECCIÓN DE CERTIFICACIONES (Basada en las marcas de aliados de la plantilla) -->
+    <section id="certificaciones" class="py-12 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-center text-sm font-semibold uppercase tracking-wider text-slate-400 mb-8">
+          Respaldados por Estándares Sanitarios Internacionales
+        </p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {certificaciones.map((cert) => (
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center">
+              <span class="text-slate-600 font-medium text-sm">{cert}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    <Catalogo lang="en" />
+    <Nosotros lang="en" />
+    <Footer lang="es" /> 
+  </body>
+</html>
